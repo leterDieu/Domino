@@ -10,7 +10,10 @@
 {% block content %}
     {% if user.is_authenticated %}
     Welcome, {{ user.username }}
-        <p><a href="{% url 'logout' %}">Log out</a></p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     {% else %}
     <a href="{% url 'login' %}">Log in</a>
     {% endif %}
