@@ -10,8 +10,8 @@ class Player {
         this.table.addCard(card)
     }
 
-    showCards() {
-        return this.table.showcontent()
+    tabled_cards(){
+        return this.table.showContent()
     }
 }
 
@@ -24,17 +24,9 @@ class Table {
         this.content.push(card)
     }
 
-    basicSpellChecks() {
-        for (let card in this.content) {
-            card.useSpell()
-        }
-    }
-
-    showcontent() {
-        let elements = []
-        for (let el in this.content) {
-            elements.push(el)
-        }
-        return elements
+    showContent() {
+        return this.content
     }
 }
+
+export { Player, Table }
