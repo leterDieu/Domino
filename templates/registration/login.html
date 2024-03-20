@@ -15,8 +15,8 @@
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Log In</button>
-    
-{% endblock %}    
+  <input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+{% endblock %}
 
 </form>
 </body>
