@@ -10,7 +10,7 @@ class Card {
 
 class Guardsman extends Card{
     constructor(team) {
-        super(3, 2, 2, {null}, team);
+        super(3, 2, 2, [null], team);
     }
 
     spellCadiaStands() {
