@@ -16,3 +16,7 @@ playertable.attack(0, aitable,"table")
 console.log(aitable)
 console.log("///////////")
 console.log(playertable)
+
+// function byebye(){
+//     console.log(1)
+// }
