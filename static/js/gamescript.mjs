@@ -1,9 +1,21 @@
 import { Guardsman } from "./card.mjs"
-import {Table} from "./table.mjs"
+import { Table, rollDice } from "./table.mjs"
+
+// ВНИМАНИЕ!: Это скрытый от пользователя код. Следите за чистотой своего кода хоть в какой-то степени: если вы случайно перепутаете перменные, вставите индекс элемента на один больше - программа полетит. При этом БЕЗ ИНКАПСУЛЯЦИИ. Вы не поймёте где ошибка сразу.
+// Будьте аккуратнее, пожалуйста.
+// Тем не менее, некоторые проверки, которые должны контролироваться не фронтендерами, всё равно ловяться. Если вы этого не заметили, возможно стоит посмотреть что функция returned.
+
+function player_deciding() {
+    return 0
+} // функция для фронтендеров. на месте её вызова вы должны передавать мне что-то.
 
 function playButtonClicked() {
-    let player_table = new Table("player", 10, 10)
-    let enemy_table = new Table("bot", 10, 10)
+    let PLAYABLE_CARDS = [Guardsman] // ВОТ ЭТО ПОЛНАЯ ХРЕНЬ. ПЕРЕПИСАТЬ. ПЕРЕДЕЛАТЬ. ЯХЗ. тут мы как-то откуда-то достаём карты колоды игрока. сами думайте как.
+
+    let player_table = new Table("player", 10, 10, PLAYABLE_CARDS)
+    let enemy_table = new Table("bot", 10, 10, PLAYABLE_CARDS)
+
+
 
     while ((player_table.hp !== 0) && (enemy_table.hp !== 0)) {
 
