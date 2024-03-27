@@ -230,4 +230,43 @@ class Kirill extends Card {
     }
 }
 
-export { Guardsman, LemanRuss, Kirill }
+
+class Glafira extends Card {
+    constructor() {
+        super("glafira", 1, 2, 2, []);
+        this.heightchance = 33
+        this.voicechance = 25
+    }
+
+    router(type, your_table=null, attacked_card=null,  enemy_table=null) {
+        if (type === "basic"){
+
+        } else if (type === "atk") {
+            this.deafeningVoice(attacked_card)
+        } else {
+
+        }
+    }
+
+    deafeningVoice(attacked_card) {
+        let random = Math.round(Math.random() * 100)
+        if (random <= this.voicechance) {
+            if (!attacked_card.conditions.includes("stunned")) {
+                attacked_card.content.push("stunned")
+            }
+        } else {
+
+        }
+    }
+
+    tryKilling(your_table) {
+        let random = Math.round(Math.random() * 100)
+        if (random <= this.heightchance) {
+
+        } else {
+            super.tryKilling(your_table);
+        }
+    }
+}
+
+export { Guardsman, LemanRuss, Kirill, Glafira }
