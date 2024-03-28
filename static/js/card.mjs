@@ -234,8 +234,8 @@ class Kirill extends Card {
 class Glafira extends Card {
     constructor() {
         super("glafira", 1, 2, 2, []);
-        this.heightchance = 33
-        this.voicechance = 25
+        this.height_chance = 33
+        this.voice_chance = 25
     }
 
     router(type, your_table=null, attacked_card=null,  enemy_table=null) {
@@ -250,23 +250,180 @@ class Glafira extends Card {
 
     deafeningVoice(attacked_card) {
         let random = Math.round(Math.random() * 100)
-        if (random <= this.voicechance) {
+        if (random <= this.voice_chance) {
             if (!attacked_card.conditions.includes("stunned")) {
                 attacked_card.content.push("stunned")
             }
         } else {
-
+            // didn't stun
         }
     }
 
     tryKilling(your_table) {
         let random = Math.round(Math.random() * 100)
-        if (random <= this.heightchance) {
-
+        if (random <= this.height_chance) {
+            // miss
         } else {
             super.tryKilling(your_table);
         }
     }
 }
 
-export { Guardsman, LemanRuss, Kirill, Glafira }
+class Sonya extends Card {
+    constructor() {
+        super("sonya", 2, 1, 2, []);
+        this.lesson_skip_chance = 70
+        this.jewish_chance = 70
+        this.turn = 0
+    }
+
+    router(type, your_table=null, attacked_card=null,  enemy_table=null) {
+        if (type === "basic"){
+            this.turn += 1
+        } else if (type === "atk") {
+            this.jewishBlood(attacked_card)
+        } else {
+
+        }
+    }
+
+    jewishBlood(attacked_card) { // AKA bash
+        let random = Math.round(Math.random() * 100)
+        if (random <= this.jewish_chance) {
+            attacked_card.hp -= this.atk
+            this.jewishBlood()
+        } else {
+            // bash didn't proknul
+        }
+    }
+
+    tryKilling(your_table) {
+        let random = Math.round(Math.random() * 100)
+        if (random <= this.lesson_skip_chance * Math.pow(0.7, this.turn)) {
+            // miss
+        } else {
+            super.tryKilling(your_table);
+        }
+    }
+}
+
+class Jinni extends Card {
+    constructor() {
+        super("jinni", 2, 2, 3, []);
+        this.confussion_chance = 30
+        this.c_hp = this.hp
+    }
+
+    router(type, your_table=null, attacked_card=null,  enemy_table=null) {
+        if (type === "basic"){
+            this.combo(your_table)
+        } else if (type === "atk") {
+            this.whatLangIsIt(attacked_card)
+        } else {
+
+        }
+    }
+
+    whatLangIsIt(attacked_card) {
+        let random = Math.round(Math.random() * 100)
+        if (random <= this.confussion_chance) {
+            attacked_card.content.push("stunned")
+        } else {
+
+        }
+    }
+
+    combo(your_table) {
+        if (this.hp > this.c_hp) {
+            this.hp = this.c_hp
+        }
+        for (let i = 0; i < your_table.content.length; i++) {
+            if (your_table.content[i].name === "ira"){
+                this.hp += 2
+                break
+            }
+        }
+
+    }
+
+    tryKilling(your_table) {
+        super.tryKilling(your_table);
+    }
+}
+
+class Boris extends Card {
+    constructor() {
+        super("jinni", 3, 2, 4, []);
+        this.mark_five_chance = 70
+        this.miss_chance = 25
+        this.deadly_list = ['vladislav', 'biolog', 'englich']
+        this.c_hp = this.hp
+        this.c_atk = this.atk
+    }
+
+    router(type, your_table=null, attacked_card=null,  enemy_table=null) {
+        this.attacked_card_name = attacked_card.name
+        if (type === "basic"){
+            this.borisPossible(your_table)
+            this.gangersLesson(your_table)
+        } else if (type === "atk") {
+
+        } else {
+
+        }
+    }
+
+    gangersLesson(your_table) {
+        let unique = []
+        let more = []
+        for (let i = 0; i < your_table.content.length; i++) {
+            if (unique.includes(your_table[i].name)) {
+                more.push(unique.indexOf(your_table[i].name))
+                more.push(i)
+            } else {
+                unique.push(your_table[i].name)
+            }
+        }
+        for (let i = 0; i < more.content.length; i++) {
+            your_table[i] = Math.round(your_table * 0.5)
+        }
+    }
+
+    borisPossible(your_table) {
+        if (this.hp > this.c_hp) {
+            this.hp = this.c_hp
+        }
+
+        if (this.atk > this.c_atk) {
+            this.atk = this.c_atk
+        }
+
+        for (let i = 0; i < your_table.content.length; i++) {
+            if (your_table.content[i].name === "natalya"){
+                let random = Math.round(Math.random() * 100)
+                if (random <= this.mark_five_chance) {
+                    this.hp += 2
+                } else {
+                    this.hp -= 2
+                    this.atk -= 1
+                }
+                break
+            }
+        }
+    }
+
+    tryKilling(your_table) {
+        if (this.deadly_list.includes(this.attacked_card_name)) {
+            let random = Math.round(Math.random() * 100)
+            if (random <= this.miss_chance) {
+                // miss
+        } else {
+            super.tryKilling(your_table);
+            super.tryKilling(your_table);
+            }
+        }
+    }
+}
+
+
+export { Guardsman, LemanRuss, Kirill, Glafira, Sonya, Jinni, Boris }

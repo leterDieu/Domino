@@ -1,4 +1,4 @@
-import {Guardsman, Kirill, LemanRuss} from "./card.mjs"
+import {Guardsman, LemanRuss, Kirill, Glafira, Sonya, Jinni, Boris} from "./card.mjs"
 import { Table, rollDice } from "./table.mjs"
 
 // ВНИМАНИЕ!: Это скрытый от пользователя код. Следите за чистотой своего кода хоть в какой-то степени: если вы случайно перепутаете перменные, вставите индекс элемента на один больше - программа полетит. При этом БЕЗ ИНКАПСУЛЯЦИИ. Вы не поймёте где ошибка сразу.

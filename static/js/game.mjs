@@ -1,4 +1,4 @@
-import {Guardsman, Kirill, LemanRuss} from "./card.mjs"
+import {Guardsman, LemanRuss, Kirill, Glafira, Sonya, Jinni, Boris} from "./card.mjs"
 import {Table} from "./table.mjs"
 
 let aitable = new Table("AI", 10, 82313213442121, [Guardsman, LemanRuss])
