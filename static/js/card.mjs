@@ -355,7 +355,7 @@ class Jinni extends Card {
 
 class Boris extends Card {
     constructor() {
-        super("jinni", 3, 2, 4, []);
+        super("boris", 3, 2, 4, []);
         this.mark_five_chance = 70
         this.miss_chance = 25
         this.deadly_list = ['vladislav', 'biolog', 'englich']
@@ -424,6 +424,91 @@ class Boris extends Card {
         }
     }
 }
+
+class Natalya extends Card {
+    constructor() {
+        super("natalya", 4, 1, 6, []);
+    }
+
+    router(type, your_table=null, attacked_card=null,  enemy_table=null) {
+        if (type === "basic"){
+            this.smartButLazy(your_table)
+        } else if (type === "atk") {
+            this.textKnowledge(attacked_card)
+        } else {
+
+        }
+    }
+
+    smartButLazy(enemy_table) {
+        for (let i = 0; i < enemy_table.content.length; i++) {
+            enemy_table[i].morale *= 0.8
+        }
+    }
+
+    textKnowledge(attacked_card) {
+        if (!attacked_card.conditions.includes['text_knowledge_def']) {
+            attacked_card.hp = 0 // insta kill
+        }
+    }
+
+    tryKilling(your_table) {
+        super.tryKilling(your_table);
+    }
+}
+
+class NatalyaAfterDeath extends Card { // do NOT include this card into table roll
+    constructor() {
+        super("natalya", 2, 4, 0, []);
+    }
+
+    router(type, your_table=null, attacked_card=null,  enemy_table=null) {
+        if (type === "basic"){
+            // pass
+        } else if (type === "atk") {
+            // pass
+        } else {
+
+        }
+    }
+
+    tryKilling(your_table) {
+        super.tryKilling(your_table);
+    }
+}
+
+
+// class Fedor extends Card {
+//     constructor() {
+//         super("fedor", 6, 2, 4, []);
+//         this.kicking_chance = 50
+//         this.prorus_chance = 75
+//     }
+//
+//     router(type, your_table=null, attacked_card=null,  enemy_table=null) {
+//         if (type === "basic"){
+//             this.turn += 1
+//         } else if (type === "atk") {
+//             this.kickEm(attacked_card)
+//         } else {
+//
+//         }
+//     }
+//
+//     kickEm(attacked_card) {
+//         let random = Math.round(Math.random() * 100)
+//         if (random <= this.kicking_chance) {
+//             attacked_card.conditions.splice()
+//             this.jewishBlood()
+//         } else {
+//             // bash didn't proknul
+//         }
+//     }
+//
+//     tryKilling(your_table) {
+//
+//     }
+
 
 
 export { Guardsman, LemanRuss, Kirill, Glafira, Sonya, Jinni, Boris }
