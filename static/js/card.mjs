@@ -311,7 +311,6 @@ class Jinni extends Card {
     constructor() {
         super("jinni", 2, 2, 3, []);
         this.confussion_chance = 30
-        this.c_hp = this.hp
     }
 
     router(type, your_table=null, attacked_card=null,  enemy_table=null) {
@@ -334,16 +333,19 @@ class Jinni extends Card {
     }
 
     combo(your_table) {
-        if (this.hp > this.c_hp) {
-            this.hp = this.c_hp
-        }
         for (let i = 0; i < your_table.content.length; i++) {
             if (your_table.content[i].name === "ira"){
-                this.hp += 2
+                if (this.conditions.includes('jinni-ira-combo')) {
+                    // pass
+                } else {
+                    this.conditions.push('jinni-ira-combo')
+                    this.hp += 2
+                }
                 break
+            } else {
+                this.conditions.splice(this.conditions.indexOf('jinni-ira-combo'))
             }
         }
-
     }
 
     tryKilling(your_table) {
@@ -357,8 +359,6 @@ class Boris extends Card {
         this.mark_five_chance = 70
         this.miss_chance = 25
         this.deadly_list = ['vladislav', 'biolog', 'englich']
-        this.c_hp = this.hp
-        this.c_atk = this.atk
     }
 
     router(type, your_table=null, attacked_card=null,  enemy_table=null) {
@@ -390,24 +390,24 @@ class Boris extends Card {
     }
 
     borisPossible(your_table) {
-        if (this.hp > this.c_hp) {
-            this.hp = this.c_hp
-        }
-
-        if (this.atk > this.c_atk) {
-            this.atk = this.c_atk
-        }
-
         for (let i = 0; i < your_table.content.length; i++) {
             if (your_table.content[i].name === "natalya"){
                 let random = Math.round(Math.random() * 100)
-                if (random <= this.mark_five_chance) {
-                    this.hp += 2
-                } else {
-                    this.hp -= 2
-                    this.atk -= 1
+                if (this.conditions.includes('nataly-buf')) {
+                    // pass
+                }
+                else {
+                    this.conditions.push('nataly-buf')
+                    if (random <= this.mark_five_chance) {
+                        this.hp += 2
+                    } else {
+                        this.hp -= 2
+                        this.atk -= 1
+                    }
                 }
                 break
+            } else {
+                this.conditions.splice(this.conditions.indexOf('nataly-buf'))
             }
         }
     }
