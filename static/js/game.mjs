@@ -1,22 +1,22 @@
-import { Guardsman } from "./card.mjs"
+import {Guardsman, LemanRuss, Kirill, Glafira, Sonya, Jinni, Boris} from "./card.mjs"
 import {Table} from "./table.mjs"
 
-let aitable = new Table("AI", 10, 2)
-aitable.addCard(new Guardsman(aitable.name))
-let playertable = new Table("player", 10, 10)
-playertable.addCard(new Guardsman(aitable.name))
+let aitable = new Table("AI", 10, 82313213442121, [Guardsman, LemanRuss])
+
+
+
+aitable.adminfiller(Guardsman)
+aitable.adminfiller(LemanRuss)
+aitable.adminfiller(Kirill)
+aitable.addCard(0)
+aitable.addCard(0)
+aitable.addCard(0)
+
+aitable.doBasicSpells()
+
 console.log(aitable)
-console.log("///////////")
-console.log(playertable)
-
-playertable.attack(0, aitable,0)
-playertable.attack(0, aitable,0)
-playertable.attack(0, aitable,"table")
-
-console.log(aitable)
-console.log("///////////")
-console.log(playertable)
-
-// function byebye(){
-//     console.log(1)
-// }
+console.log(aitable.content[0].conditions)
+aitable.killCard(2)
+console.log(aitable.content[0].conditions)
+aitable.killCard(1)
+console.log(aitable.content[0].conditions)
