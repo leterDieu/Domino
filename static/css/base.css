@@ -1,7 +1,0 @@
-/*this is an example of how css style could be performed for all html's (see base.html <link>)*/
-/*make separate css files for each html if needed*/
-
-
-html {
-    color: red;
-}
